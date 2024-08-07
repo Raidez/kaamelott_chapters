@@ -1,53 +1,47 @@
-# Kaamelott Chapters
-Recently I downloaded (totally legally) the tv show, Kaamelott.
-But each episode was splitted, it was a pain in the ass to watch.
+# Svelte + Vite
 
-So I made a shell script at first to merge all the videos together and use themoviedb.org api to get the title of each episode.
+This template should help get you started developing with Svelte in Vite.
 
-And I switched back to Windows ... so the script wasn't very useful anymore.
+## Recommended IDE Setup
 
-## How to cook your merged video
-Need an input and output folder, in the input, I put a options.json file, like this :
-```json
-{
-    "series_id": 11466,
-    "season_number": 1,
-    "language": "fr-FR",
-    "video_size": {
-        "width": 1920,
-        "height": 1080
-    },
-    "episodes": [
-        {
-            "episode_number": 1,
-            "input_filename": "movies/Kaamelott.S01E001.Heat.mkv"
-        },
-        {
-            "episode_number": 2,
-            "input_filename": "movies/Kaamelott.S01E002.Les_Tartes_aux_Myrtilles.mkv"
-        },
-        {
-            "episode_number": 3,
-            "input_filename": "movies/Kaamelott.S01E003.La_Table_de_Breccan.mkv"
-        },
-        {
-            "episode_number": 4,
-            "input_filename": "movies/Kaamelott.S01E004.Le_Chevalier_Mystere.mkv"
-        },
-        {
-            "episode_number": 5,
-            "input_filename": "movies/Kaamelott.S01E005.Le_Fleau_de_Dieu.mkv"
-        },
-        {
-            "episode_number": 6,
-            "input_filename": "movies/Kaamelott.S01E006.Le_Garde_du_Corps.mkv"
-        },
-        {
-            "episode_number": 7,
-            "input_filename": "movies/Kaamelott.S01E007.Des_nouvelles_du_Monde.mkv"
-        }
-    ],
-    "chapter_format": "Épisode {number} - {name}",
-    "output_filename": "Kaamelott.S01E001-007.mkv"
-}
+[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+
+## Need an official Svelte framework?
+
+Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+
+## Technical considerations
+
+**Why use this over SvelteKit?**
+
+- It brings its own routing solution which might not be preferable for some users.
+- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+
+This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+
+Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+
+**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+
+Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+
+**Why include `.vscode/extensions.json`?**
+
+Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+
+**Why enable `checkJs` in the JS template?**
+
+It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
+
+**Why is HMR not preserving my local component state?**
+
+HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
+
+If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
+
+```js
+// store.js
+// An extremely simple external store
+import { writable } from 'svelte/store'
+export default writable(0)
 ```

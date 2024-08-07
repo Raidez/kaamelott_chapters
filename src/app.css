@@ -1,0 +1,19 @@
+:root {
+  color-scheme: light dark;
+  --color: rgba(255, 255, 255, 0.87);
+  --background: #242424;
+
+  color: var(--color);
+  background-color: var(--background);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color: #213547;
+    --background: #ffffff;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
